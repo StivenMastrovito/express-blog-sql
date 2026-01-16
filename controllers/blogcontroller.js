@@ -73,15 +73,69 @@ function show(req, res) {
 }
 
 function store(req, res) {
+    const dati = req.body;
+    
+    const query = `
+    insert into posts (title, content, image)
+    values (?, ?, ?)
+    `
+    connection.query(query, [dati.title, dati.content, dati.image], (err, results) => {
+        if(err){
+            return res.status(500).json({
+                message: "internal error",
+            })
+        }
 
+        res.status(201).json(dati)
+    })
 }
 
 function update(req, res) {
+    const idPost = req.params.id
+    const dati = req.body;
+    
+    const query = `
+    update posts 
+    set title = ?, content = ?, image = ?
+    where id = ?
+    `
+    connection.query(query, [dati.title, dati.content, dati.image, idPost], (err, results) => {
+        if(err){
+            return res.status(500).json({
+                message: "internal error",
+            })
+        }
+
+        res.status(201).json({
+            id: idPost,
+            title: dati.title,
+            content: dati.content,
+            image: dati.image
+        })
+    })
 
 }
 
 function modify(req, res) {
+    const id = req.params.id;
+    const dati = req.body;
 
+    const query = `
+    update posts 
+    set ${dati.name} = ?
+    where id = ?
+    `
+    connection.query(query, [dati.content, id], (err, results) => {
+        if(err){
+            return res.status(500).json({
+                message: "internal error",
+            })
+        }
+
+        res.status(201).json({
+            [dati.name]: dati.content,
+        })
+    })
 }
 
 function destroy(req, res) {

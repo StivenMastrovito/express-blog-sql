@@ -14,10 +14,10 @@ router.get("/:id/details", blogController.show);
 router.post("/", blogController.store);
 
 // MODIFY
-router.put("/id", blogController.modify);
+router.put("/:id", blogController.update);
 
 // UPDATE
-router.patch("/:id", blogController.update);
+router.patch("/:id", blogController.modify);
 
 // DESTROY
 router.delete("/:id", blogController.destroy);
