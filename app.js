@@ -17,7 +17,7 @@ app.listen(port, (err) => {
     }
 })
 
-app.use("/blogs", blogRouter);
+app.use("/posts", blogRouter);
 
 
 
