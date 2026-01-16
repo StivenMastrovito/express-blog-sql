@@ -1,6 +1,8 @@
 import express from "express"
 import connection from "./db.js";
 import blogRouter from "./routers/blog.js";
+import tagRouter from "./routers/tags.js";
+
 
 
 const app = express();
@@ -18,6 +20,8 @@ app.listen(port, (err) => {
 })
 
 app.use("/posts", blogRouter);
+app.use("/tags", tagRouter);
+
 
 
 
